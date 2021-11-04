@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 03 nov. 2021 à 18:15
--- Version du serveur : 10.4.21-MariaDB
--- Version de PHP : 7.4.24
+-- Généré le : Dim 09 mai 2021 à 09:56
+-- Version du serveur :  10.4.13-MariaDB
+-- Version de PHP : 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,39 +18,41 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `coursstructurebaseprositephp`
+-- Base de données : `gestioncompte`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `matable`
+-- Structure de la table `utilisateur`
 --
 
-CREATE TABLE `matable` (
-  `data1` int(11) NOT NULL,
-  `data2` varchar(50) NOT NULL
+CREATE TABLE `utilisateur` (
+  `login` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `mail` varchar(100) NOT NULL,
+  `role` varchar(50) NOT NULL,
+  `image` varchar(100) NOT NULL,
+  `est_valide` tinyint(1) NOT NULL,
+  `clef` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `matable`
+-- Déchargement des données de la table `utilisateur`
 --
 
-INSERT INTO `matable` (`data1`, `data2`) VALUES
-(1, 'a'),
-(2, 'b'),
-(3, 'c'),
-(4, 'd');
+INSERT INTO `utilisateur` (`login`, `password`, `mail`, `role`, `image`, `est_valide`, `clef`) VALUES
+('test', '$2y$10$1B8GVORwdMSe/pKjo9Vr0upo5rlosY.HL7S4BIfMjygSymCzotAcC', 'test@test.fr', 'administrateur', '', 1, 0);
 
 --
 -- Index pour les tables déchargées
 --
 
 --
--- Index pour la table `matable`
+-- Index pour la table `utilisateur`
 --
-ALTER TABLE `matable`
-  ADD PRIMARY KEY (`data1`);
+ALTER TABLE `utilisateur`
+  ADD PRIMARY KEY (`login`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
