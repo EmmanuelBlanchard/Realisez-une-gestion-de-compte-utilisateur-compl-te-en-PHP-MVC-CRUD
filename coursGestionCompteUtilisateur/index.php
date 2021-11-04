@@ -64,6 +64,8 @@ try {
                     break;
                     case "validation_modificationMail" : $utilisateurController->validation_modificationMail(Securite::secureHTML($_POST['mail']));
                     break;
+                    case "modificationPassword" : $utilisateurController->modificationPassword();
+                    break;
                     default : throw new Exception("La page n'existe pas");
                 }
             }

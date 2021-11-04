@@ -107,6 +107,16 @@ class UtilisateurController extends MainController {
         header("Location: ".URL."compte/profil");
     }
 
+    public function modificationPassword() {
+        $data_page = [
+            "page_description" => "Page de modification du password",
+            "page_title" => "Page de modification du password",
+            "view" => "views/Utilisateur/modificationPassword.view.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->genererPage($data_page);
+    }
+
     public function pageErreur($message){
         parent::pageErreur($message);
     }
