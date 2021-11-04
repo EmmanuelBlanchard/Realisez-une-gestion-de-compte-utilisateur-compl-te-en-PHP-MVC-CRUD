@@ -82,7 +82,7 @@ class UtilisateurController extends MainController {
     }
 
     public function validation_mailCompte($login,$clef) {
-        if($this->utilisateurManager->bdValidationMailCompte($login,$clef)){
+        if($this->utilisateurManager->bdValidationMailCompte($login,$clef)) {
             // Toolbox::ajouterMessageAlerte("Le compte a été activé !", Toolbox::COULEUR_VERTE);
             // Soit l'utilisateur est directement connecté
             // $_SESSION['profil'] = [
@@ -96,6 +96,15 @@ class UtilisateurController extends MainController {
             Toolbox::ajouterMessageAlerte("Le compte n'a pas été activé !", Toolbox::COULEUR_ROUGE);
             header('Location: '.URL.'creerCompte');
         }
+    }
+
+    public function validation_modificationMail($mail) {
+        if($this->utilisateurManager->bdModificationMailUser($_SESSION['profil']['login'],$mail)) {
+            Toolbox::ajouterMessageAlerte("La modification de l'adresse email est effectuée", Toolbox::COULEUR_VERTE);
+        } else {
+            Toolbox::ajouterMessageAlerte("Aucune modification de l'adresse email n'est effectuée", Toolbox::COULEUR_ROUGE);
+        }
+        header("Location: ".URL."compte/profil");
     }
 
     public function pageErreur($message){
