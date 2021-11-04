@@ -34,6 +34,10 @@ try {
                 header('Location: '.URL."login");
             }
         break;
+        case "creerCompte" : $visiteurController->creerCompte();
+        break;
+        case "validation_creerCompte" : echo "test";
+        break;
         case "compte" : 
             if(!Securite::estConnecte()) {
                 Toolbox::ajouterMessageAlerte("Veuillez vous connecter !", Toolbox::COULEUR_ROUGE);
