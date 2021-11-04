@@ -28,6 +28,16 @@ class VisiteurController extends MainController {
         $this->genererPage($data_page);
     }
 
+    public function login() {
+        $data_page = [
+            "page_description" => "Page de connexion",
+            "page_title" => "Page de connexion",
+            "view" => "views/Visiteur/login.view.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->genererPage($data_page);
+    }
+
     public function pageErreur($message){
         parent::pageErreur($message);
     }
