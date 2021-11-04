@@ -36,8 +36,9 @@ try {
         break;
         case "compte" : 
             switch($url[1]){
-                case "profil": 
-                    $utilisateurController->profil();
+                case "profil": $utilisateurController->profil();
+                break;
+                case "deconnexion" : $utilisateurController->deconnexion();
                 break;
                 default : throw new Exception("La page n'existe pas");
             }
