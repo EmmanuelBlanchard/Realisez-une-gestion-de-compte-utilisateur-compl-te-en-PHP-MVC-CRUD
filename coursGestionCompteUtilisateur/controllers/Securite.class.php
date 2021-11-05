@@ -1,7 +1,8 @@
 <?php
 
 class Securite {
-    
+    public const COOKIE_NAME="timers";
+
     public static function secureHTML($chaine) {
         return htmlentities($chaine);
     }
@@ -16,6 +17,17 @@ class Securite {
     
     public static function estAdministrateur() {
         return ($_SESSION['profil']['role'] === "administrateur");
+    }
+
+    public static function genererCookieConnexion(){
+        $ticket = session_id().microtime().rand(0,999999);
+        $ticket = hash("sha512",$ticket);
+        setcookie(self::COOKIE_NAME,$ticket,time()+(60*20));
+        $_SESSION['profil'][self::COOKIE_NAME] = $ticket;
+    }
+
+    public static function checkCookieConnexion(){
+        return $_COOKIE[self::COOKIE_NAME] === $_SESSION['profil'][self::COOKIE_NAME];
     }
 
 }

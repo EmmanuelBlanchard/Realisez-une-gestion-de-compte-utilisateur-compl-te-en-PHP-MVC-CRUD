@@ -58,7 +58,13 @@ try {
             if(!Securite::estConnecte()) {
                 Toolbox::ajouterMessageAlerte("Veuillez vous connecter !", Toolbox::COULEUR_ROUGE);
                 header("Location: ".URL."login");
+            } elseif(!Securite::checkCookieConnexion()) {
+                Toolbox::ajouterMessageAlerte("Veuillez vous reconnecter !", Toolbox::COULEUR_ROUGE);
+                setcookie(Securite::COOKIE_NAME,"",time() - 3600);
+                unset($_SESSION["profil"]);
+                header("Location: ".URL."login");
             } else {
+                Securite::genererCookieConnexion();// Regénération du cookie
                 switch($url[1]){
                     case "profil" : $utilisateurController->profil();
                     break;
@@ -95,12 +101,18 @@ try {
         break;
         case "administration" :
             if(!Securite::estConnecte()) {
-                Toolbox::ajouterMessageAlerte("Veuillez vous connecter !",Toolbox::COULEUR_ROUGE);
+                Toolbox::ajouterMessageAlerte("Veuillez vous connecter !", Toolbox::COULEUR_ROUGE);
+                header("Location: ".URL."login");
+            } elseif(!Securite::checkCookieConnexion()) {
+                Toolbox::ajouterMessageAlerte("Veuillez vous reconnecter !", Toolbox::COULEUR_ROUGE);
+                setcookie(Securite::COOKIE_NAME,"",time() - 3600);
+                unset($_SESSION["profil"]);
                 header("Location: ".URL."login");
             } elseif(!Securite::estAdministrateur()) {
                 Toolbox::ajouterMessageAlerte("Vous n'avez le droit d'être ici",Toolbox::COULEUR_ROUGE);
                 header("Location: ".URL."accueil");
             } else {
+                Securite::genererCookieConnexion();// Regénération du cookie
                 switch($url[1]) {
                     case "droits" : $administrateurController->droits();
                     break;
