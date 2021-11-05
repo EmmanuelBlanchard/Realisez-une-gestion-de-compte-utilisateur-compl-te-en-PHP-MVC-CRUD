@@ -8,8 +8,10 @@ require_once("./controllers/Toolbox.class.php");
 require_once("./controllers/Securite.class.php");
 require_once("./controllers/Visiteur/Visiteur.controller.php");
 require_once("./controllers/Utilisateur/Utilisateur.controller.php");
+require_once("./controllers/Administrateur/Administrateur.controller.php");
 $visiteurController = new VisiteurController();
 $utilisateurController = new UtilisateurController();
+$administrateurController = new AdministrateurController();
 
 try {
     if(empty($_GET['page'])){
@@ -86,6 +88,21 @@ try {
                             Toolbox::ajouterMessageAlerte("Vous n'avez pas modifié l'image", Toolbox::COULEUR_ROUGE);
                             header("Location: ".URL."compte/profil");
                         }
+                    break;
+                    default : throw new Exception("La page n'existe pas");
+                }
+            }
+        break;
+        case "administration" :
+            if(!Securite::estConnecte()) {
+                Toolbox::ajouterMessageAlerte("Veuillez vous connecter !",Toolbox::COULEUR_ROUGE);
+                header("Location: ".URL."login");
+            } elseif(!Securite::estAdministrateur()) {
+                Toolbox::ajouterMessageAlerte("Vous n'avez le droit d'être ici",Toolbox::COULEUR_ROUGE);
+                header("Location: ".URL."accueil");
+            } else {
+                switch($url[1]) {
+                    case "droits" : $administrateurController->droits();
                     break;
                     default : throw new Exception("La page n'existe pas");
                 }
