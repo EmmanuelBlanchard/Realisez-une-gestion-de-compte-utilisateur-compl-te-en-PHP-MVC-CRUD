@@ -54,7 +54,7 @@ class UtilisateurController extends MainController {
         if($this->utilisateurManager->verificationLoginDisponible($login)) {
             $passwordCrypte = password_hash($password,PASSWORD_DEFAULT);
             $clef = rand(0,9999);
-            if($this->utilisateurManager->bdCreerCompte($login,$passwordCrypte,$mail,$clef)){
+            if($this->utilisateurManager->bdCreerCompte($login,$passwordCrypte,$mail,$clef,"profils/profil.png")) {
                 $this->sendMailValidation($login,$mail,$clef);
                 Toolbox::ajouterMessageAlerte("La compte a été créé, Un mail de validation vous a été envoyé !", Toolbox::COULEUR_VERTE);
                 header("Location: ".URL."login");
