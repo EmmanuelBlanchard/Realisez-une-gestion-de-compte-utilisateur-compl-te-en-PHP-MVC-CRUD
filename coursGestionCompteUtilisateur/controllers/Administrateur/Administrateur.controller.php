@@ -8,7 +8,7 @@ class AdministrateurController extends MainController {
     public function __construct() {
         $this->administrateurManager = new AdministrateurManager();
     }
-    
+
     public function droits() {
         $utilisateurs = $this->administrateurManager->getUtilisateurs();
 
@@ -20,6 +20,15 @@ class AdministrateurController extends MainController {
             "template" => "views/common/template.php"
         ];
         $this->genererPage($data_page);
+    }
+
+    public function validation_modificationRole($login,$role) {
+        if($this->administrateurManager->bdModificationRoleUser($login,$role)) {
+            Toolbox::ajouterMessageAlerte("La modification du rôle a été prise en compte", Toolbox::COULEUR_VERTE);
+        } else {
+            Toolbox::ajouterMessageAlerte("La modification du rôle n'a pas été prise en compte", Toolbox::COULEUR_ROUGE);
+        }
+        header("Location: ".URL."administration/droits");
     }
 
     public function pageErreur($msg){

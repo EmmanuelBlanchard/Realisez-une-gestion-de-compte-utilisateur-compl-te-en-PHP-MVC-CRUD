@@ -10,7 +10,20 @@
             <tr>
                 <td><?= $utilisateur['login'] ?></td>
                 <td><?= (int)$utilisateur['est_valide'] === 0 ? "non validé" : "validé" ?></td>
-                <td><?= $utilisateur['role'] ?></td>
+                <td>
+                    <?php if($utilisateur['role'] === "administrateur") : ?>
+                        <?= $utilisateur['role'] ?>
+                    <?php else: ?>
+                        <form method="POST" action="<?= URL ?>administration/validation_modificationRole">
+                            <input type="hidden" name="login" value="<?= $utilisateur['login'] ?>" />
+                            <select class="form-select" name="role" onchange="confirm('Confirmez vous la modification du rôle ?') ? submit() : document.location.reload()">
+                                <option value="utilisateur" <?= $utilisateur['role'] === "utilisateur" ? "selected" : ""?>>Utilisateur</option>
+                                <option value="superutilisateur" <?= $utilisateur['role'] === "superutilisateur" ? "selected" : ""?>>Super Utilisateur</option>
+                                <option value="administrateur" <?= $utilisateur['role'] === "administrateur" ? "selected" : ""?>>Administrateur</option>
+                            </select>
+                        </form>
+                    <?php endif; ?>
+                </td>
             </tr>
         <?php endforeach; ?>
     </thead>
