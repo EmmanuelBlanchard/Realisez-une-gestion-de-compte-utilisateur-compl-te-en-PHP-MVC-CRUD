@@ -28,4 +28,13 @@
 
 <div>
     <a href="<?= URL ?>compte/modificationPassword" class="btn btn-warning">Changer le mot de passe</a>
+    <button id="btnSuppressionCompte" class="btn btn-danger">Supprimer son compte</button>
+</div>
+
+<div id="suppressionCompte" class="d-none m-2">
+    <div class="alert alert-danger">
+        Veuillez confirmer la suppression du compte.
+        <br />
+        <a href="<?= URL ?>compte/suppressionCompte" class="btn btn-danger">Je souhaite supprimer mon compte définitivement !</a>
+    </div>
 </div>
