@@ -9,7 +9,6 @@ btnModificationMail.addEventListener("click", function() {
 })
 
 document.querySelector("#btnSuppressionCompte").addEventListener("click", function(){
-    console.log("test");
     document.querySelector("#suppressionCompte").classList.remove("d-none");
 })
 

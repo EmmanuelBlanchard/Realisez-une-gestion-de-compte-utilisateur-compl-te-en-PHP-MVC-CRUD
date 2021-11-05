@@ -77,6 +77,8 @@ try {
                             header("Location: ".URL."compte/modificationPassword");
                         }
                     break;
+                    case "suppressionCompte" : $utilisateurController->suppressionCompte();
+                    break;
                     default : throw new Exception("La page n'existe pas");
                 }
             }

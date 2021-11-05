@@ -139,6 +139,16 @@ class UtilisateurController extends MainController {
         }
     }
 
+    public function suppressionCompte() {
+        if($this->utilisateurManager->bdSuppressionCompte($_SESSION['profil']['login'])) {
+            Toolbox::ajouterMessageAlerte("La suppression du compte est effectuée", Toolbox::COULEUR_VERTE);
+            $this->deconnexion();
+        } else {
+            Toolbox::ajouterMessageAlerte("La suppression du compte n'a pas été effectuée. Contactez l'administrateur",Toolbox::COULEUR_ROUGE);
+            header("Location: ".URL."compte/profil");
+        }
+    }
+
     public function pageErreur($message){
         parent::pageErreur($message);
     }
